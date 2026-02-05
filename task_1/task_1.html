@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #222;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        section h2 {
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        #skills ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            list-style: none;
+        }
+
+        #skills li {
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .project {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background: #222;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #222;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Harini Reddy</h1>
+        <p>Aspiring Developer | Learner</p>
+
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>
+            I am a passionate learner interested in web development and data analytics.
+            I enjoy building projects that help me understand real-world applications
+            of programming concepts.
+        </p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>Python</li>
+            <li>SQL</li>
+            <li>Basics of Machine Learning</li>
+        </ul>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+
+        <article class="project">
+            <h3>AI powdered Clinical Trial Matching System</h3>
+            <p>Built an AI-based clinical trail matching system that uses embeddings and summarization techiniques</p>
+        </article>
+
+        <article class="project">
+            <h3>Meal Recommendation System</h3>
+            <p>A personalized meal planning platform using machine learning.</p>
+        </article>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+
+        <form id="contactForm" onsubmit="return validateForm()">
+            <label>Name:</label>
+            <input type="text" id="name">
+            <span class="error" id="nameError"></span>
+
+            <label>Email:</label>
+            <input type="email" id="email">
+            <span class="error" id="emailError"></span>
+
+            <label>Message:</label>
+            <textarea id="message" rows="4"></textarea>
+            <span class="error" id="messageError"></span>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Harini Reddy. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let message = document.getElementById("message").value.trim();
+
+            let isValid = true;
+
+            document.getElementById("nameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("messageError").textContent = "";
+
+            if (name === "") {
+                document.getElementById("nameError").textContent = "Name is required";
+                isValid = false;
+            }
+
+            if (email === "") {
+                document.getElementById("emailError").textContent = "Email is required";
+                isValid = false;
+            } else if (!email.includes("@")) {
+                document.getElementById("emailError").textContent = "Enter a valid email";
+                isValid = false;
+            }
+
+            if (message === "") {
+                document.getElementById("messageError").textContent = "Message cannot be empty";
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Message sent successfully!");
+            }
+
+            return isValid;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Registration Dashboard</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 650px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  input, button {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+  }
+
+  button {
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #0056b3;
+  }
+
+  .message {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 4px;
+  }
+
+  .error {
+    background: #f8d7da;
+    color: #721c24;
+  }
+
+  .success {
+    background: #d4edda;
+    color: #155724;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+
+  th {
+    background: #007bff;
+    color: white;
+  }
+
+  .delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Student Registration</h2>
+
+  <div id="message"></div>
+
+  <form id="studentForm">
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+    <button type="submit">Add Student</button>
+  </form>
+
+  <h2>Student Dashboard</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="studentTable"></tbody>
+  </table>
+</div>
+
+<script>
+
+var appName = "Student App";     
+let studentCount = 0;    
+const MAX = 50;                
+
+const form = document.getElementById("studentForm");
+const tableBody = document.getElementById("studentTable");
+const messageDiv = document.getElementById("message");
+
+/* Regular function */
+function showMessage(text, type) {
+  messageDiv.textContent = text;
+  messageDiv.className = "message " + type;
+}
+
+const clearMessage = () => {
+  setTimeout(() => {
+    messageDiv.textContent = "";
+    messageDiv.className = "message";
+  }, 2000);
+};
+
+document.getElementById("name").addEventListener("input", function () {
+  console.log("Typing:", this.value);
+});
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value;
+  let confirmPassword = document.getElementById("confirmPassword").value;
+
+
+  if (!name || !email || !password || !confirmPassword) {
+    showMessage("All fields are required!", "error");
+    clearMessage();
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    showMessage("Passwords do not match!", "error");
+    clearMessage();
+    return;
+  }
+
+  if (studentCount >= MAX) {
+    showMessage("Student limit reached!", "error");
+    clearMessage();
+    return;
+  }
+
+  /* switch case */
+  let role;
+  switch (true) {
+    case email.includes("@college"):
+      role = "College Student";
+      break;
+    default:
+      role = "Guest Student";
+  }
+
+  addStudent(name, email, role);
+  studentCount++;
+
+  showMessage(`Student ${name} added successfully!`, "success");
+  clearMessage();
+  form.reset();
+});
+
+/* ADD STUDENT FUNCTION */
+function addStudent(name, email, role) {
+  const row = document.createElement("tr");
+
+  let student = { name, email, role };
+
+  /* for...in loop */
+  for (let key in student) {
+    const td = document.createElement("td");
+    td.textContent = student[key];
+    row.appendChild(td);
+  }
+
+  const actionTd = document.createElement("td");
+  actionTd.innerHTML = `<button class="delete-btn">Delete</button>`;
+  row.appendChild(actionTd);
+
+  tableBody.appendChild(row);
+}
+
+/* EVENT DELEGATION (DELETE) */
+tableBody.addEventListener("click", function (e) {
+  if (e.target.classList.contains("delete-btn")) {
+    e.target.closest("tr").remove();
+    studentCount--;
+
+    /* while loop */
+    let i = 0;
+    while (i < 1) {
+      showMessage("Student deleted successfully!", "success");
+      clearMessage();
+      i++;
+    }
+  }
+});
+
+/* for loop */
+for (let i = 0; i < 1; i++) {
+  console.log(appName + " loaded");
+}
+</script>
+
+</body>
+</html>

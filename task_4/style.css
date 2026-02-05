@@ -1,0 +1,44 @@
+body {
+    font-family: Arial;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+#category-container, #menu-container, #cart-container {
+    background-color: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #aaa;
+}
+
+button {
+    padding: 8px 15px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+#cart-items {
+    list-style-type: none;
+    padding-left: 0;
+}
